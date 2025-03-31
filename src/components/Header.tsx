@@ -1,12 +1,12 @@
 import {
     Box,
     Button,
-    HStack,
+    HStack,Stack,
     IconButton,
     useDisclosure,
     useColorMode,
     LightMode,
-    useColorModeValue
+    useColorModeValue,
 } from "@chakra-ui/react";
 import {FaAirbnb, FaMoon, FaSun} from "react-icons/fa";
 import LoginModal from "./LoginModal.tsx";
@@ -28,8 +28,25 @@ export default function Header(){
     // 컬러가 아니더라도 아이콘으로 if 문처럼 사용 가능함 (light mode, dark mode)
     const Icon =useColorModeValue(FaMoon,FaSun);
     return (
-        /*py == padding y축 , px == padding x축 */
-    <HStack justifyContent={"space-between"} py={"5"} px={"10"} borderBottomWidth={1}>
+        /*py == padding y축 , px == padding x축
+        * HStack,VStack 은 수평수직 고정이지면 유동적으로 사용할땐 그냥 Stack*/
+    <Stack
+        justifyContent={"space-between"}
+        alignItems="center"
+        py={"5"}
+        px={"40"}
+        // 작을땐 위아래로, 클때는 box들이 앙옆으로 이동
+        direction={{
+            sm:"column",
+            md:"row",
+
+        }}
+        // 작을땐 거리를 벌리고, 클때는
+        spacing={{
+            sm:4,
+            md:0,
+        }}
+        borderBottomWidth={1}>
         {/*chakra ui 컬러는 chakra iu에서만 변경 가능 bnb로고는 chakra ui가 아님
         또한 useColorModeValue로 다크모드,라이트모드 변경 할때마다 설정 해놓은 색상으로 설정변경*/}
         <Box color={logoColor}>
@@ -58,7 +75,7 @@ export default function Header(){
         </HStack>
         <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />
         <SignUpModal isOpen={isSignUpOpen} onClose={isSignUpClose} />
-    </HStack>
+    </Stack>
     )
 
 }

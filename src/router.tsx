@@ -2,6 +2,7 @@ import {createBrowserRouter} from "react-router-dom"
 import Root from "./components/Root"
 import Home from "./routes/Home"
 import NotFound from "./routes/NotFound.tsx";
+import RoomDetail from "./routes/RoomDetail.tsx";
 
 const router = createBrowserRouter([{
     // 어떻게든 /만 있으면 기본적으로 Root를 가져옴
@@ -15,6 +16,10 @@ const router = createBrowserRouter([{
             path:"",
             element:<Home/>,
         },
+        {
+            path:"rooms/:roomPk",
+            element:<RoomDetail/>,
+        }
     ]
 },
 ]);
